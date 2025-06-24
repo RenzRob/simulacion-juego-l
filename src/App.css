@@ -1,42 +1,270 @@
-#root {
-  max-width: 1280px;
+.App {
+  text-align: center;
+  padding: 20px;
+  max-width: 800px;
   margin: 0 auto;
-  padding: 2rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h1 {
+  color: #333;
+  margin-bottom: 20px;
+  font-size: 2.5em;
+}
+
+.game-info {
+  background-color: #f8f9fa;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.game-info p {
+  margin: 5px 0;
+  font-size: 1.1em;
+}
+
+.player.red {
+  color: #dc3545;
+  font-weight: bold;
+}
+
+.player.black {
+  color: #343a40;
+  font-weight: bold;
+}
+
+.winner {
+  font-size: 1.3em;
+  font-weight: bold;
+  color: #28a745;
+  background-color: #d4edda;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #c3e6cb;
+}
+
+.board {
+  display: inline-block;
+  border: 3px solid #333;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  margin: 20px 0;
+}
+
+.row {
+  display: flex;
+}
+
+.cell {
+  width: 60px;
+  height: 60px;
+  border: 1px solid #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.cell:hover {
+  background-color: #f0f0f0;
+}
+
+.cell.red-l {
+  background-color: #dc3545;
+  color: white;
+  font-weight: bold;
+}
+
+.cell.red-l::after {
+  content: 'L';
+  font-size: 24px;
+}
+
+.cell.black-l {
+  background-color: #343a40;
+  color: white;
+  font-weight: bold;
+}
+
+.cell.black-l::after {
+  content: 'L';
+  font-size: 24px;
+}
+
+.cell.circle {
+  background-color: #6c757d;
+  border-radius: 50%;
+  margin: 5px;
+  width: 50px;
+  height: 50px;
+}
+
+.cell.circle::after {
+  content: '●';
+  color: white;
+  font-size: 20px;
+}
+
+.cell.selected {
+  box-shadow: 0 0 0 3px #007bff;
+  z-index: 1;
+}
+
+.cell.valid-move {
+  background-color: #d1ecf1;
+  border-color: #bee5eb;
+}
+
+.cell.valid-move:hover {
+  background-color: #b8daff;
+}
+
+.cell.multi-option-move {
+  background-color: #fff3cd;
+  border: 2px solid #ffc107;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.7; }
+  100% { opacity: 1; }
+}
+
+.cell.preview-move {
+  background-color: #1565c0 !important;
+  border: 3px solid #0d47a1 !important;
+  box-shadow: 0 0 15px rgba(21, 101, 192, 0.6) !important;
+  animation: glow 1s ease-in-out infinite alternate;
+  z-index: 2;
+}
+
+@keyframes glow {
+  from { box-shadow: 0 0 15px rgba(21, 101, 192, 0.6); }
+  to { box-shadow: 0 0 25px rgba(21, 101, 192, 0.9); }
+}
+
+.controls {
+  margin: 20px 0;
+}
+
+.controls button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.controls button:hover {
+  background-color: #0056b3;
+}
+
+.instructions {
+  text-align: left;
+  background-color: #e9ecef;
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 20px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.instructions h3 {
+  color: #495057;
+  margin-top: 0;
+}
+
+.instructions ol {
+  color: #6c757d;
+  line-height: 1.6;
+}
+
+.instructions li {
+  margin-bottom: 8px;
+}
+
+.movement-options {
+  background-color: #f8f9fa;
+  border: 2px solid #ffc107;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px 0;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.movement-options h4 {
+  margin-top: 0;
+  color: #495057;
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.options-grid {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 15px 0;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+.option-button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+.option-button:hover {
+  background-color: #218838;
+}
+
+.cancel-button {
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  display: block;
+  margin: 10px auto 0;
+  transition: background-color 0.2s;
+}
+
+.cancel-button:hover {
+  background-color: #5a6268;
+}
+
+@media (max-width: 768px) {
+  .App {
+    padding: 10px;
   }
-  to {
-    transform: rotate(360deg);
+  
+  .cell {
+    width: 50px;
+    height: 50px;
   }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+  
+  .cell.circle {
+    width: 40px;
+    height: 40px;
+    margin: 5px;
   }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}
+  
+  h1 {
+    font-size: 2em;
+  }
+} 
